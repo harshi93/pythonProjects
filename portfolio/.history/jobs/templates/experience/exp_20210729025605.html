@@ -1,0 +1,8 @@
+<h1>All my jobs</h1>
+
+{% for job in jobs.all %}
+{{ job.roleName }} <br/>
+{{ job.roleLocation }} <br/>
+{{ job.roleKeySkills }}
+{{ job.roleDescription }}
+{% endfor %}
