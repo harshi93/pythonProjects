@@ -38,3 +38,8 @@
     python3 manage.py runserver
     ```
 
+### Upcoming
+
+- Lookup Records
+- Delete a record 
+- Update a record
