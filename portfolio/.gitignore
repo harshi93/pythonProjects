@@ -1,0 +1,4 @@
+.history/*
+.vscode/*
+django_*_*/*
+widget_tweaks/*

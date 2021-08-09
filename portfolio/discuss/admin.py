@@ -5,3 +5,5 @@ from .models import opportunity
 @admin.register(opportunity)
 class opportunityAdmin(admin.ModelAdmin):
     list_display = ['recruiterName', 'recruiterEmail', 'jobDetails']
+    list_filter = ('recruiterName',)
+    list_filter = ('recruiterEmail',)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'jobs',
     'discuss',
     'widget_tweaks',
+    'register',
 ]
 
 MIDDLEWARE = [

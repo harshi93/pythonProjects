@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .forms import opportunityForm
+from .models import opportunity
 
 # Create your views here.
-def opportunity(request):
+def oppos(request):
     if request.method == 'POST':
         filled_form = opportunityForm(request.POST)
         if filled_form.is_valid():
@@ -15,3 +17,15 @@ def opportunity(request):
     else:
         form = opportunityForm()
         return render(request, 'opportunity/opportunity.html', {'opportunityForm': form})
+
+
+def conversation(request):
+    convos = opportunity.objects.all()
+    
+    paginator = Paginator(convos, 5) 
+    page_number = request.GET.get('page')
+    paged_convos = paginator.get_page(page_number)
+
+    print(paginator)
+
+    return render(request, 'opportunity/conversation.html', {'convos': paged_convos})

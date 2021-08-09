@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import jobs.views
+import register.views
 from discuss import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,7 +25,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', jobs.views.experience, name='experience'),
     path('jobs/<int:job_id>', jobs.views.details, name='details'),
-    path('discuss', views.opportunity, name='discuss')
+    path('discuss', views.oppos, name='discuss'),
+    path('conversation', views.conversation, name='conversation'),
+    path('login', register.views.login, name='login'),
+    path('signup', register.views.signup, name='signup'),
+    path('logout', register.views.logout, name='logout'),
+    path('dashboard', register.views.dashboard, name='dashboard')
+
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
