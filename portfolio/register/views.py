@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
+def signup(request):
+    return render(request, 'accounts/register.html')
+
 def login(request):
-    pass 
+    return render(request, 'accounts/login.html')
 
 def logout(request):
-    pass
+    return redirect(request, 'accounts/logout.html')
 
 def dashboard(request):
-    pass
-
-def signup(request):
-    pass
+    return render(request, 'accounts/dashboard.html')
