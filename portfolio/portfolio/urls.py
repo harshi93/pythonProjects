@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 import jobs.views
 import register.views
+import employee_register.views
 from discuss import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,9 +31,12 @@ urlpatterns = [
     path('login', register.views.login, name='login'),
     path('signup', register.views.signup, name='signup'),
     path('logout', register.views.logout, name='logout'),
-    path('dashboard', register.views.dashboard, name='dashboard')
-
-] 
+    path('dashboard', register.views.dashboard, name='dashboard'),
+    path('lue', employee_register.views.employee_add, name='empshowup'),
+    path('list', employee_register.views.employee_get, name='empget'),
+    path('<int:id>', employee_register.views.employee_add, name='empshowup'),
+    path('demp/<int:id>', employee_register.views.employee_delete, name='empdel')
+]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

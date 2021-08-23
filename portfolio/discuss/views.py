@@ -20,7 +20,7 @@ def oppos(request):
 
 
 def conversation(request):
-    convos = opportunity.objects.all()
+    convos = opportunity.objects.get_queryset().order_by('id')
     
     paginator = Paginator(convos, 5) 
     page_number = request.GET.get('page')

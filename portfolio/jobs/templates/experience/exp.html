@@ -54,8 +54,8 @@
           <p class="text-muted">When i am not busy, developing infrastructure 
             that helps organizations make world a better place to live. 
             I am either cooking or capturing beauty of nature. </p>
-          <a href="" class="text-black">Register</a>
-          <a href="" class="text-black">Login</a>  
+          <a href="{% url 'signup' %}" class="text-black">Register</a>
+          <a href="{% url 'login'%}" class="text-black">Login</a>  
           </div>
       </div>
     </div>
@@ -86,6 +86,7 @@
           <a href=mailto:singhharshit.4674@gmail.com class="btn btn-secondary my-2">Email me</a>
           <a href="{% url 'conversation' %}" class="btn btn-secondary my-2">My Calendar Queue</a>
           <a href="{% url 'discuss' %}" class="btn btn-secondary my-2">Let Me Call You</a>
+          <a href="{% url 'empget' %}" class="btn btn-secondary my-2">Sample CRUD App</a>
         </p>
       </div>
     </div>

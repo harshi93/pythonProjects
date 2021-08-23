@@ -1,4 +1,16 @@
 .history/*
 .vscode/*
 django_*_*/*
-widget_tweaks/*
+widget_tweaks*
+pytz*
+Django*/
+asgiref*
+crispy*
+photos*
+font*
+django*
+images*
+typing*/
+sqlparse*
+static*
+bin*

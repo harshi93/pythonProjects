@@ -1,0 +1,42 @@
+{% extends "emp_reg/base.html" %}
+
+{% block content %}
+{% load static %}
+<table class="table table borderless">
+    <thead class="border-bottom font-weight bold">
+        <tr>
+            <td>Id</td>
+            <td>Code</td>
+            <td>Full Name</td>
+            <td>Position</td>
+            <td>Mobile</td>
+            <td>
+                <a href="{% url 'empshowup'%}" class="btn text-secondary px-0">
+                    <button class="btn btn-success btn-sm"> Add New </button>
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employee_list %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.emp_code }}</td>
+                <td>{{ employee.fullname }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.mobile }}</td>
+                <td>
+                    <a href="{% url 'empshowup' employee.id %}" class="btn text-secondary px-0">
+                        <button class="btn btn-success btn-sm"> Edit </button>
+                    </a>
+                    <form action="{% url 'empdel' employee.id %}" method="post">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
