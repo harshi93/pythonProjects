@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'employee_register',
     'register',
+    'product',
     'fontawesomefree'
 ]
 
