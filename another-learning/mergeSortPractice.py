@@ -1,5 +1,6 @@
 # Merge Sort
 # O(n * log(n)) running time
+# has optimal running time for comparison based algorithms
 
 def merge_sort(arr):
     if len(arr) > 1: #do something only if lenght of array is greater than 1
