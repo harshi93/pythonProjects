@@ -5,7 +5,7 @@ class Graph:
   #Constructor
     def __init__(self, edges, n):
 
-      # a list of to represent adjacency list
+      # a list of list to track adjacency(neighbours) list
       self.adjList = [[] for _ in range(n)]
 
       # add edges to the undirectred graph
