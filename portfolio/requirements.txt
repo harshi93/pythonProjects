@@ -11,7 +11,7 @@ cloudpickle==1.6.0
 croniter==0.3.37
 cryptography==3.4.7
 dask==2021.4.0
-distributed==2021.4.0
+distributed==2021.10.0
 django-widget-tweaks==1.4.8
 docker==4.4.4
 Flask==1.1.2
