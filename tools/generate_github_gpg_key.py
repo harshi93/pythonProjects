@@ -191,10 +191,81 @@ def main():
     print("\nTo copy your public key to clipboard, run:")
     print(f"cat {public_key_file} | pbcopy")
     
-    # Configure Git to use the new key
-    print("\nTo configure Git to use this key, run these commands:")
-    print(f"git config --global user.signingkey {fingerprint}")
-    print("git config --global commit.gpgsign true")
+    # Ask if the user wants to configure Git now
+    configure_now = input("\nDo you want to configure Git to use this key now? (Y/n): ").strip().lower()
+    if configure_now == "" or configure_now == "y" or configure_now == "yes":
+        try:
+            # Configure Git to use the new key
+            print("\nConfiguring Git to use your new GPG key...")
+            
+            # Set the signing key
+            subprocess.run(
+                ["git", "config", "--global", "user.signingkey", fingerprint],
+                check=True
+            )
+            print("✓ Set signing key")
+            
+            # Enable commit signing
+            subprocess.run(
+                ["git", "config", "--global", "commit.gpgsign", "true"],
+                check=True
+            )
+            print("✓ Enabled commit signing")
+            
+            # Enable tag signing
+            subprocess.run(
+                ["git", "config", "--global", "tag.gpgsign", "true"],
+                check=True
+            )
+            print("✓ Enabled tag signing")
+            
+            # Set up GPG_TTY in shell profile for persistent configuration
+            shell_profile = None
+            if os.path.exists(os.path.expanduser("~/.zshrc")):
+                shell_profile = os.path.expanduser("~/.zshrc")
+            elif os.path.exists(os.path.expanduser("~/.bashrc")):
+                shell_profile = os.path.expanduser("~/.bashrc")
+            elif os.path.exists(os.path.expanduser("~/.bash_profile")):
+                shell_profile = os.path.expanduser("~/.bash_profile")
+            
+            if shell_profile:
+                # Check if GPG_TTY is already in the profile
+                with open(shell_profile, 'r') as f:
+                    content = f.read()
+                
+                if "export GPG_TTY=$(tty)" not in content:
+                    with open(shell_profile, 'a') as f:
+                        f.write("\n# GPG configuration for Git commit signing\nexport GPG_TTY=$(tty)\n")
+                    print(f"✓ Added GPG_TTY to {shell_profile}")
+                    
+                    # Export GPG_TTY in the current session
+                    os.environ["GPG_TTY"] = subprocess.check_output(["tty"]).decode().strip()
+                    print("✓ Set GPG_TTY in current session")
+                else:
+                    print(f"✓ GPG_TTY already configured in {shell_profile}")
+            else:
+                print("! Could not find shell profile to add GPG_TTY configuration")
+                print("  Please manually add 'export GPG_TTY=$(tty)' to your shell profile")
+            
+            # Restart the GPG agent to ensure everything is working
+            subprocess.run(["gpgconf", "--kill", "gpg-agent"], check=False)
+            subprocess.run(["gpg-agent", "--daemon"], check=False)
+            print("✓ Restarted GPG agent")
+            
+            print("\nGit has been successfully configured to use your GPG key!")
+            print("You can now make signed commits and tags.")
+        except Exception as e:
+            print(f"\nError configuring Git: {str(e)}")
+            print("\nTo manually configure Git to use this key, run these commands:")
+            print(f"git config --global user.signingkey {fingerprint}")
+            print("git config --global commit.gpgsign true")
+            print("git config --global tag.gpgsign true")
+    else:
+        # Just show the commands to run manually
+        print("\nTo configure Git to use this key, run these commands:")
+        print(f"git config --global user.signingkey {fingerprint}")
+        print("git config --global commit.gpgsign true")
+        print("git config --global tag.gpgsign true")
     
     print("\nDone! You can now make signed commits to GitHub.")
     
