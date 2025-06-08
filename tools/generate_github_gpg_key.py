@@ -6,6 +6,27 @@ import subprocess
 import argparse
 import sys
 import tempfile
+import shutil
+import datetime
+import json
+
+def create_backup_file(file_path, backup_dir=None):
+    """Create a backup of the specified file"""
+    if not os.path.exists(file_path):
+        return None
+    
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = os.path.basename(file_path)
+    
+    if backup_dir:
+        # Create backup directory if it doesn't exist
+        os.makedirs(backup_dir, exist_ok=True)
+        backup_path = os.path.join(backup_dir, f"{filename}.{timestamp}.bak")
+    else:
+        backup_path = f"{file_path}.{timestamp}.bak"
+        
+    shutil.copy2(file_path, backup_path)
+    return backup_path
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Generate a GPG key for GitHub commit signing')
@@ -15,11 +36,16 @@ def parse_arguments():
     parser.add_argument('--key-type', default='RSA', help='Key type (default: RSA)')
     parser.add_argument('--key-length', type=int, default=4096, help='Key length in bits (default: 4096)')
     parser.add_argument('--no-expire', action='store_true', help='Set the key to never expire')
+    parser.add_argument('--skip-backup', action='store_true', help='Skip creating backups of modified files')
+    parser.add_argument('--backup-dir', help='Directory to store backups (default: same directory as original files)')
     return parser.parse_args()
 
 def main():
     # Parse command line arguments
     args = parse_arguments()
+    
+    # Initialize backup tracking
+    backup_files = {}
     
     # Get the path to gpg binary dynamically
     try:
@@ -195,6 +221,15 @@ def main():
     configure_now = input("\nDo you want to configure Git to use this key now? (Y/n): ").strip().lower()
     if configure_now == "" or configure_now == "y" or configure_now == "yes":
         try:
+            # Create backup of the gitconfig file before modifying
+            if not args.skip_backup:
+                gitconfig_path = os.path.expanduser("~/.gitconfig")
+                if os.path.exists(gitconfig_path):
+                    backup_path = create_backup_file(gitconfig_path, args.backup_dir)
+                    if backup_path:
+                        backup_files["gitconfig"] = backup_path
+                        print(f"✓ Created backup of Git config at: {backup_path}")
+            
             # Configure Git to use the new key
             print("\nConfiguring Git to use your new GPG key...")
             
@@ -204,6 +239,13 @@ def main():
                 check=True
             )
             print("✓ Set signing key")
+            
+            # Configure the GPG program path
+            subprocess.run(
+                ["git", "config", "--global", "gpg.program", gpg_binary],
+                check=True
+            )
+            print(f"✓ Set GPG program path to {gpg_binary}")
             
             # Enable commit signing
             subprocess.run(
@@ -229,6 +271,13 @@ def main():
                 shell_profile = os.path.expanduser("~/.bash_profile")
             
             if shell_profile:
+                # Create backup of shell profile before modifying
+                if not args.skip_backup and os.path.exists(shell_profile):
+                    backup_path = create_backup_file(shell_profile, args.backup_dir)
+                    if backup_path:
+                        backup_files["shell_profile"] = backup_path
+                        print(f"✓ Created backup of shell profile at: {backup_path}")
+                
                 # Check if GPG_TTY is already in the profile
                 with open(shell_profile, 'r') as f:
                     content = f.read()
@@ -258,30 +307,56 @@ def main():
             print(f"\nError configuring Git: {str(e)}")
             print("\nTo manually configure Git to use this key, run these commands:")
             print(f"git config --global user.signingkey {fingerprint}")
+            print(f"git config --global gpg.program {gpg_binary}")
             print("git config --global commit.gpgsign true")
             print("git config --global tag.gpgsign true")
     else:
         # Just show the commands to run manually
         print("\nTo configure Git to use this key, run these commands:")
         print(f"git config --global user.signingkey {fingerprint}")
+        print(f"git config --global gpg.program {gpg_binary}")
         print("git config --global commit.gpgsign true")
         print("git config --global tag.gpgsign true")
+    
+    # Save backup information to a file and show summary
+    if backup_files and not args.skip_backup:
+        backup_info_path = os.path.expanduser("~/gpg_key_setup_backups.json")
+        try:
+            with open(backup_info_path, 'w') as f:
+                json.dump({
+                    "timestamp": datetime.datetime.now().isoformat(),
+                    "backup_files": backup_files
+                }, f, indent=2)
+            print("\nBackup Summary:")
+            print("===============")
+            print(f"Backup information saved to: {backup_info_path}")
+            for file_type, backup_path in backup_files.items():
+                print(f"* {file_type}: {backup_path}")
+            print("\nTo restore backups, manually copy these files back to their original locations.")
+        except Exception as e:
+            print(f"Warning: Failed to save backup information: {e}")
     
     print("\nDone! You can now make signed commits to GitHub.")
     
     print("\nTroubleshooting GPG Signing Issues:")
     print("=====================================")
     print("If you encounter 'error: gpg failed to sign the data' when committing, try:")
-    print("\n1. Restart the GPG agent:")
+    print("\n1. Verify your GPG configuration:")
+    print("   git config --list | grep -E '(gpg|sign)'")
+    print("\n2. Restart the GPG agent:")
     print("   gpgconf --kill gpg-agent")
-    print("\n2. Set the GPG_TTY environment variable:")
+    print("\n3. Set the GPG_TTY environment variable:")
     print("   export GPG_TTY=$(tty)")
-    print("\n3. Start a new GPG agent daemon:")
+    print("\n4. Start a new GPG agent daemon:")
     print("   gpg-agent --daemon")
-    print("\n4. Try the commit again:")
-    print("   git commit -m \"your commit message\"")
+    print("\n5. Test if GPG works correctly:")
+    print("   echo \"test\" | gpg --clearsign")
+    print("\n6. Try the commit again:")
+    print("   git commit -m \"your commit message\")
     print("\nFor persistent setup, add 'export GPG_TTY=$(tty)' to your shell profile")
     print("(.zshrc, .bashrc, etc.) to avoid future issues.")
+    print("\nEnsure your GPG key is available in your keyring:")
+    print(f"   gpg --list-secret-keys {fingerprint}")
 
 if __name__ == "__main__":
     main()
