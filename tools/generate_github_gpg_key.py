@@ -197,6 +197,20 @@ def main():
     print("git config --global commit.gpgsign true")
     
     print("\nDone! You can now make signed commits to GitHub.")
+    
+    print("\nTroubleshooting GPG Signing Issues:")
+    print("=====================================")
+    print("If you encounter 'error: gpg failed to sign the data' when committing, try:")
+    print("\n1. Restart the GPG agent:")
+    print("   gpgconf --kill gpg-agent")
+    print("\n2. Set the GPG_TTY environment variable:")
+    print("   export GPG_TTY=$(tty)")
+    print("\n3. Start a new GPG agent daemon:")
+    print("   gpg-agent --daemon")
+    print("\n4. Try the commit again:")
+    print("   git commit -m \"your commit message\"")
+    print("\nFor persistent setup, add 'export GPG_TTY=$(tty)' to your shell profile")
+    print("(.zshrc, .bashrc, etc.) to avoid future issues.")
 
 if __name__ == "__main__":
     main()
