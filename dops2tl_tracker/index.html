@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps to Team Lead - 90 Day Progress Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-rocket"></i> DevOps to Team Lead Transition</h1>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="currentDay">1</span>
+                        <span class="stat-label">Current Day</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="overallProgress">0%</span>
+                        <span class="stat-label">Overall Progress</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="completedTasks">0</span>
+                        <span class="stat-label">Tasks Completed</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-tab" data-tab="phase1">Phase 1 (Days 1-30)</button>
+            <button class="nav-tab" data-tab="phase2">Phase 2 (Days 31-60)</button>
+            <button class="nav-tab" data-tab="phase3">Phase 3 (Days 61-90)</button>
+            <button class="nav-tab" data-tab="metrics">Metrics & KPIs</button>
+            <button class="nav-tab" data-tab="resources">Resources</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Progress Overview -->
+                    <div class="card progress-overview">
+                        <h2><i class="fas fa-chart-line"></i> Progress Overview</h2>
+                        <div class="progress-circle-container">
+                            <div class="progress-circle" id="progressCircle">
+                                <span class="progress-text" id="progressText">0%</span>
+                            </div>
+                        </div>
+                        <div class="phase-progress">
+                            <div class="phase-item">
+                                <span class="phase-name">Phase 1</span>
+                                <div class="phase-bar">
+                                    <div class="phase-fill" id="phase1Progress"></div>
+                                </div>
+                                <span class="phase-percent" id="phase1Percent">0%</span>
+                            </div>
+                            <div class="phase-item">
+                                <span class="phase-name">Phase 2</span>
+                                <div class="phase-bar">
+                                    <div class="phase-fill" id="phase2Progress"></div>
+                                </div>
+                                <span class="phase-percent" id="phase2Percent">0%</span>
+                            </div>
+                            <div class="phase-item">
+                                <span class="phase-name">Phase 3</span>
+                                <div class="phase-bar">
+                                    <div class="phase-fill" id="phase3Progress"></div>
+                                </div>
+                                <span class="phase-percent" id="phase3Percent">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Week Tasks -->
+                    <div class="card current-tasks">
+                        <h2><i class="fas fa-tasks"></i> This Week's Focus</h2>
+                        <div id="currentWeekTasks"></div>
+                    </div>
+
+                    <!-- Milestones -->
+                    <div class="card milestones">
+                        <h2><i class="fas fa-flag-checkered"></i> Key Milestones</h2>
+                        <div class="milestone-list" id="milestoneList"></div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card quick-actions">
+                        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="openJournal()"><i class="fas fa-book"></i> Daily Journal</button>
+                            <button class="action-btn" onclick="openFeedback()"><i class="fas fa-comments"></i> Weekly Reflection</button>
+                            <button class="action-btn" onclick="exportProgress()"><i class="fas fa-download"></i> Export Progress</button>
+                            <button class="action-btn" onclick="resetProgress()"><i class="fas fa-refresh"></i> Reset Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 Tab -->
+            <div id="phase1" class="tab-content">
+                <div class="phase-header">
+                    <h2>Phase 1: Foundation Building (Days 1-30)</h2>
+                    <p>Focus on team assessment, quick wins, and basic leadership skills</p>
+                </div>
+                <div class="weeks-container" id="phase1Weeks"></div>
+            </div>
+
+            <!-- Phase 2 Tab -->
+            <div id="phase2" class="tab-content">
+                <div class="phase-header">
+                    <h2>Phase 2: Leadership Development (Days 31-60)</h2>
+                    <p>Develop people management, strategic thinking, and cross-functional collaboration</p>
+                </div>
+                <div class="weeks-container" id="phase2Weeks"></div>
+            </div>
+
+            <!-- Phase 3 Tab -->
+            <div id="phase3" class="tab-content">
+                <div class="phase-header">
+                    <h2>Phase 3: Leadership Excellence (Days 61-90)</h2>
+                    <p>Master change management, executive communication, and innovation leadership</p>
+                </div>
+                <div class="weeks-container" id="phase3Weeks"></div>
+            </div>
+
+            <!-- Metrics Tab -->
+            <div id="metrics" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="card metrics-card">
+                        <h3>Team Performance Metrics</h3>
+                        <div class="metric-item">
+                            <label>Deployment Frequency (% increase)</label>
+                            <input type="number" id="deploymentFreq" placeholder="Target: 20%">
+                        </div>
+                        <div class="metric-item">
+                            <label>Lead Time Reduction (%)</label>
+                            <input type="number" id="leadTimeReduction" placeholder="Target: 15%">
+                        </div>
+                        <div class="metric-item">
+                            <label>MTTR Improvement (%)</label>
+                            <input type="number" id="mttrImprovement" placeholder="Target: 25%">
+                        </div>
+                        <div class="metric-item">
+                            <label>Change Failure Rate (%)</label>
+                            <input type="number" id="changeFailureRate" placeholder="Target: <5%">
+                        </div>
+                    </div>
+
+                    <div class="card metrics-card">
+                        <h3>Leadership Effectiveness</h3>
+                        <div class="metric-item">
+                            <label>Team Satisfaction Score (1-5)</label>
+                            <input type="number" id="teamSatisfaction" min="1" max="5" step="0.1" placeholder="Target: 4.2+">
+                        </div>
+                        <div class="metric-item">
+                            <label>360-Degree Feedback (1-5)</label>
+                            <input type="number" id="feedback360" min="1" max="5" step="0.1" placeholder="Target: 4.0+">
+                        </div>
+                        <div class="metric-item">
+                            <label>Employee Retention (%)</label>
+                            <input type="number" id="retention" placeholder="Target: 95%+">
+                        </div>
+                        <div class="metric-item">
+                            <label>Internal Promotion Rate (%)</label>
+                            <input type="number" id="promotionRate" placeholder="Target: 30%">
+                        </div>
+                    </div>
+
+                    <div class="card metrics-card">
+                        <h3>Business Impact</h3>
+                        <div class="metric-item">
+                            <label>System Uptime (%)</label>
+                            <input type="number" id="uptime" placeholder="Target: 99.9%+">
+                        </div>
+                        <div class="metric-item">
+                            <label>Cost Optimization (%)</label>
+                            <input type="number" id="costOptimization" placeholder="Target: 10%">
+                        </div>
+                        <div class="metric-item">
+                            <label>Critical Security Incidents</label>
+                            <input type="number" id="securityIncidents" placeholder="Target: 0">
+                        </div>
+                        <div class="metric-item">
+                            <label>Stakeholder Satisfaction (1-5)</label>
+                            <input type="number" id="stakeholderSatisfaction" min="1" max="5" step="0.1" placeholder="Target: 4.0+">
+                        </div>
+                    </div>
+                </div>
+                <button class="save-metrics-btn" onclick="saveMetrics()">Save Metrics</button>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources" class="tab-content">
+                <div class="resources-grid">
+                    <div class="card resource-card">
+                        <h3><i class="fas fa-book"></i> Essential Reading</h3>
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <input type="checkbox" id="book1">
+                                <label for="book1">"The Manager's Path" by Camille Fournier</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="book2">
+                                <label for="book2">"Accelerate" by Nicole Forsgren</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="book3">
+                                <label for="book3">"The Phoenix Project" by Gene Kim</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="book4">
+                                <label for="book4">"Team Topologies" by Matthew Skelton</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="book5">
+                                <label for="book5">"The Coaching Habit" by Michael Bungay Stanier</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card resource-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Online Courses</h3>
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <input type="checkbox" id="course1">
+                                <label for="course1">LinkedIn Learning: "First-Time Manager Foundations"</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="course2">
+                                <label for="course2">Coursera: "Leading People and Teams"</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="course3">
+                                <label for="course3">Pluralsight: "DevOps Leadership" track</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="course4">
+                                <label for="course4">Cloud Leadership Certifications</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card resource-card">
+                        <h3><i class="fas fa-podcast"></i> Podcasts & Learning</h3>
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <input type="checkbox" id="podcast1">
+                                <label for="podcast1">Manager Tools</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="podcast2">
+                                <label for="podcast2">DevOps Chat</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="podcast3">
+                                <label for="podcast3">Software Engineering Daily</label>
+                            </div>
+                            <div class="resource-item">
+                                <input type="checkbox" id="podcast4">
+                                <label for="podcast4">The Changelog</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="journalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('journalModal')">&times;</span>
+            <h2>Daily Journal</h2>
+            <div class="journal-form">
+                <label>Date:</label>
+                <input type="date" id="journalDate">
+                <label>What leadership skills did I practice today?</label>
+                <textarea id="leadershipSkills" rows="3"></textarea>
+                <label>How did I support my team members' growth?</label>
+                <textarea id="teamSupport" rows="3"></textarea>
+                <label>What strategic initiatives did I advance?</label>
+                <textarea id="strategicInitiatives" rows="3"></textarea>
+                <label>Key learnings and insights:</label>
+                <textarea id="keyLearnings" rows="3"></textarea>
+                <button onclick="saveJournal()">Save Entry</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+            <h2>Weekly Reflection</h2>
+            <div class="feedback-form">
+                <label>Week of:</label>
+                <input type="week" id="feedbackWeek">
+                <label>Overall satisfaction with progress (1-5):</label>
+                <input type="range" id="progressSatisfaction" min="1" max="5" value="3">
+                <span id="satisfactionValue">3</span>
+                <label>Biggest challenge this week:</label>
+                <textarea id="biggestChallenge" rows="3"></textarea>
+                <label>Key accomplishment:</label>
+                <textarea id="keyAccomplishment" rows="3"></textarea>
+                <label>Areas for improvement:</label>
+                <textarea id="improvementAreas" rows="3"></textarea>
+                <label>Next week's focus:</label>
+                <textarea id="nextWeekFocus" rows="3"></textarea>
+                <button onclick="saveFeedback()">Save Reflection</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
