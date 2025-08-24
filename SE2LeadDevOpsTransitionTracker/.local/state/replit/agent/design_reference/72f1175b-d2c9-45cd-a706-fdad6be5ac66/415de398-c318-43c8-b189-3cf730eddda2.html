@@ -1,0 +1,603 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Leadership Transition Plan - 90 Day Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1E40AF',
+                        'secondary': '#059669',
+                        'accent': '#DC2626',
+                        'warning': '#F59E0B',
+                        'success': '#10B981',
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-inter">
+    
+    <!-- @COMPONENT: NavigationSidebar -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="bg-white shadow-lg w-64 min-h-screen">
+            <div class="p-6 border-b border-slate-200">
+                <h1 class="text-xl font-bold text-slate-800">Leadership Transition</h1>
+                <p class="text-sm text-slate-600 mt-1">90-Day Development Plan</p>
+            </div>
+            
+            <nav class="mt-6">
+                <div class="px-4">
+                    <div class="mb-4">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Overview</h3>
+                        <a href="#dashboard" class="flex items-center px-3 py-2 text-slate-700 bg-blue-50 rounded-lg border-l-4 border-primary">
+                            <i class="fas fa-chart-pie mr-3 text-primary"></i>
+                            Dashboard
+                        </a>
+                        <a href="#timeline" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-calendar-alt mr-3"></i>
+                            Timeline
+                        </a>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Phases</h3>
+                        <a href="#phase1" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-foundation mr-3"></i>
+                            Phase 1: Foundation
+                        </a>
+                        <a href="#phase2" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-users mr-3"></i>
+                            Phase 2: Development
+                        </a>
+                        <a href="#phase3" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-trophy mr-3"></i>
+                            Phase 3: Excellence
+                        </a>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tracking</h3>
+                        <a href="#tasks" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-tasks mr-3"></i>
+                            Tasks & Goals
+                        </a>
+                        <a href="#team" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-user-friends mr-3"></i>
+                            Team Assessment
+                        </a>
+                        <a href="#learning" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-book mr-3"></i>
+                            Learning Resources
+                        </a>
+                        <a href="#metrics" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            KPI Metrics
+                        </a>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tools</h3>
+                        <a href="#assessment" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-clipboard-check mr-3"></i>
+                            Self-Assessment
+                        </a>
+                        <a href="#risks" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-exclamation-triangle mr-3"></i>
+                            Risk Mitigation
+                        </a>
+                        <a href="#reports" class="flex items-center px-3 py-2 text-slate-600 hover:text-slate-700 hover:bg-slate-50 rounded-lg mt-1">
+                            <i class="fas fa-file-alt mr-3"></i>
+                            Reports
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- @END_COMPONENT: NavigationSidebar -->
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- @COMPONENT: TopHeader -->
+            <header class="bg-white shadow-sm border-b border-slate-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Dashboard Overview</h2>
+                        <p class="text-slate-600 mt-1">Track your leadership transition progress</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                            <i class="fas fa-download mr-2"></i>
+                            Export Report
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-slate-300 rounded-full"></div>
+                            <span class="text-slate-700 font-medium" data-bind="user.name">John Smith</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: TopHeader -->
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Progress Overview Cards -->
+                <!-- @COMPONENT: ProgressOverview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-600 text-sm font-medium">Overall Progress</p>
+                                <p class="text-3xl font-bold text-slate-800 mt-2" data-bind="progress.overall">42%</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-pie text-primary text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="bg-slate-200 rounded-full h-2">
+                                <div class="bg-primary rounded-full h-2" style="width: 42%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">Day 38 of 90</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-600 text-sm font-medium">Tasks Completed</p>
+                                <p class="text-3xl font-bold text-slate-800 mt-2" data-bind="tasks.completed">24/58</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="bg-slate-200 rounded-full h-2">
+                                <div class="bg-success rounded-full h-2" style="width: 41%"></div>
+                            </div>
+                            <p class="text-xs text-success mt-2">+3 this week</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-600 text-sm font-medium">Team Satisfaction</p>
+                                <p class="text-3xl font-bold text-slate-800 mt-2" data-bind="metrics.teamSatisfaction">4.2/5</p>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-star text-warning text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="bg-slate-200 rounded-full h-2">
+                                <div class="bg-warning rounded-full h-2" style="width: 84%"></div>
+                            </div>
+                            <p class="text-xs text-warning mt-2">Target: 4.2+</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-600 text-sm font-medium">Learning Progress</p>
+                                <p class="text-3xl font-bold text-slate-800 mt-2" data-bind="learning.progress">60%</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="bg-slate-200 rounded-full h-2">
+                                <div class="bg-purple-600 rounded-full h-2" style="width: 60%"></div>
+                            </div>
+                            <p class="text-xs text-purple-600 mt-2">3/5 books completed</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: ProgressOverview -->
+
+                <!-- Main Dashboard Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Timeline & Current Phase -->
+                    <!-- @COMPONENT: TimelineWidget -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-slate-800">90-Day Timeline</h3>
+                            <button class="text-primary hover:text-blue-800 text-sm font-medium">View Details</button>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Phase 1 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-sm"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-slate-800">Phase 1: Foundation Building</h4>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Completed</span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm mt-1">Days 1-30 • Team assessment, quick wins, leadership foundation</p>
+                                    <div class="mt-2">
+                                        <div class="bg-slate-200 rounded-full h-2">
+                                            <div class="bg-success rounded-full h-2" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 2 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-warning rounded-full flex items-center justify-center">
+                                        <i class="fas fa-clock text-white text-sm"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-slate-800">Phase 2: Leadership Development</h4>
+                                        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">In Progress</span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm mt-1">Days 31-60 • People management, strategic thinking, collaboration</p>
+                                    <div class="mt-2">
+                                        <div class="bg-slate-200 rounded-full h-2">
+                                            <div class="bg-warning rounded-full h-2" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 3 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-trophy text-slate-500 text-sm"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-semibold text-slate-800">Phase 3: Leadership Excellence</h4>
+                                        <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-full">Upcoming</span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm mt-1">Days 61-90 • Change management, scaling, innovation</p>
+                                    <div class="mt-2">
+                                        <div class="bg-slate-200 rounded-full h-2">
+                                            <div class="bg-slate-400 rounded-full h-2" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: TimelineWidget -->
+
+                    <!-- Upcoming Tasks -->
+                    <!-- @COMPONENT: UpcomingTasks -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-slate-800">This Week's Focus</h3>
+                            <button class="text-primary hover:text-blue-800 text-sm font-medium">View All</button>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- @MAP: upcomingTasks.map(task => ( -->
+                            <div class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg">
+                                <input type="checkbox" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-800" data-bind="task.title">Conduct 1:1 meetings with team members</p>
+                                    <p class="text-xs text-slate-600 mt-1" data-bind="task.phase">Phase 2 • Due Tomorrow</p>
+                                </div>
+                                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">High</span>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg">
+                                <input type="checkbox" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-800">Complete coaching skills workshop</p>
+                                    <p class="text-xs text-slate-600 mt-1">Phase 2 • Due Friday</p>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Medium</span>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg">
+                                <input type="checkbox" checked class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-500 line-through">Read "The Coaching Habit" chapters 1-3</p>
+                                    <p class="text-xs text-slate-500 mt-1">Phase 2 • Completed</p>
+                                </div>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Done</span>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg">
+                                <input type="checkbox" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-slate-800">Create team OKRs for Q2</p>
+                                    <p class="text-xs text-slate-600 mt-1">Phase 2 • Due Next Week</p>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Medium</span>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+
+                        <button class="w-full mt-4 text-primary hover:text-blue-800 text-sm font-medium py-2 border border-primary rounded-lg hover:bg-blue-50 transition-colors">
+                            Add New Task
+                        </button>
+                    </div>
+                    <!-- @END_COMPONENT: UpcomingTasks -->
+                </div>
+
+                <!-- KPI Metrics Dashboard -->
+                <!-- @COMPONENT: KPIMetrics -->
+                <div class="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-slate-800">Key Performance Indicators</h3>
+                        <div class="flex space-x-2">
+                            <button class="text-slate-600 hover:text-slate-800 px-3 py-1 rounded bg-slate-100 text-sm">Week</button>
+                            <button class="text-white bg-primary px-3 py-1 rounded text-sm">Month</button>
+                            <button class="text-slate-600 hover:text-slate-800 px-3 py-1 rounded bg-slate-100 text-sm">Quarter</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-rocket text-success text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800">Deployment Frequency</h4>
+                            <p class="text-2xl font-bold text-slate-800 mt-2" data-bind="kpi.deploymentFreq">+18%</p>
+                            <p class="text-sm text-success">Target: +20%</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-clock text-primary text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800">Lead Time Reduction</h4>
+                            <p class="text-2xl font-bold text-slate-800 mt-2" data-bind="kpi.leadTime">-12%</p>
+                            <p class="text-sm text-primary">Target: -15%</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-tools text-warning text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800">MTTR Improvement</h4>
+                            <p class="text-2xl font-bold text-slate-800 mt-2" data-bind="kpi.mttr">-20%</p>
+                            <p class="text-sm text-warning">Target: -25%</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-shield-alt text-accent text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-800">Change Failure Rate</h4>
+                            <p class="text-2xl font-bold text-slate-800 mt-2" data-bind="kpi.failureRate">3.2%</p>
+                            <p class="text-sm text-success">Target: <5%</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: KPIMetrics -->
+
+                <!-- Recent Activity & Quick Actions -->
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Recent Activity -->
+                    <!-- @COMPONENT: RecentActivity -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-6">Recent Activity</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- @MAP: recentActivities.map(activity => ( -->
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-success rounded-full mt-2"></div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-slate-800" data-bind="activity.description">Completed team retrospective for Phase 1</p>
+                                    <p class="text-xs text-slate-500 mt-1" data-bind="activity.timestamp">2 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-warning rounded-full mt-2"></div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-slate-800">Updated individual development plan for Sarah</p>
+                                    <p class="text-xs text-slate-500 mt-1">5 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-slate-800">Scheduled 1:1 meetings for next week</p>
+                                    <p class="text-xs text-slate-500 mt-1">1 day ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-success rounded-full mt-2"></div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-slate-800">Finished reading "The Manager's Path" Chapter 4</p>
+                                    <p class="text-xs text-slate-500 mt-1">2 days ago</p>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+
+                        <button class="w-full mt-4 text-slate-600 hover:text-slate-800 text-sm py-2">
+                            View All Activity
+                        </button>
+                    </div>
+                    <!-- @END_COMPONENT: RecentActivity -->
+
+                    <!-- Quick Actions -->
+                    <!-- @COMPONENT: QuickActions -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-6">Quick Actions</h3>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-primary hover:bg-blue-50 transition-colors group">
+                                <i class="fas fa-calendar-plus text-primary text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Schedule 1:1</p>
+                            </button>
+
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-success hover:bg-green-50 transition-colors group">
+                                <i class="fas fa-clipboard-check text-success text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Weekly Assessment</p>
+                            </button>
+
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-warning hover:bg-amber-50 transition-colors group">
+                                <i class="fas fa-book-open text-warning text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Log Learning</p>
+                            </button>
+
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-purple-600 hover:bg-purple-50 transition-colors group">
+                                <i class="fas fa-chart-bar text-purple-600 text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Update Metrics</p>
+                            </button>
+
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-accent hover:bg-red-50 transition-colors group">
+                                <i class="fas fa-exclamation-triangle text-accent text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Add Risk</p>
+                            </button>
+
+                            <button class="p-4 border border-slate-200 rounded-lg hover:border-slate-600 hover:bg-slate-50 transition-colors group">
+                                <i class="fas fa-sticky-note text-slate-600 text-xl mb-2 group-hover:scale-110 transition-transform"></i>
+                                <p class="text-sm font-medium text-slate-800">Add Note</p>
+                            </button>
+                        </div>
+
+                        <!-- @FUNCTIONALITY: File upload for documents and progress reports -->
+                        <div class="mt-6 p-4 border-2 border-dashed border-slate-300 rounded-lg hover:border-primary transition-colors cursor-pointer" data-implementation="Use ObjectUploader component here">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt text-slate-400 text-2xl mb-2"></i>
+                                <p class="text-sm text-slate-600">Upload documents or progress reports</p>
+                                <p class="text-xs text-slate-400 mt-1">PDF, DOC, or images</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: QuickActions -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- @COMPONENT: Modal for Task Details (Hidden by default) -->
+    <div id="taskModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" data-implementation="Show/hide based on modal state">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-90vh overflow-y-auto">
+                <div class="p-6 border-b border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-slate-800">Task Details</h3>
+                        <button class="text-slate-400 hover:text-slate-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Task Title</label>
+                            <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter task title">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Description</label>
+                            <textarea class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3" placeholder="Task description"></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Phase</label>
+                                <select class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>Phase 1: Foundation</option>
+                                    <option>Phase 2: Development</option>
+                                    <option>Phase 3: Excellence</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Priority</label>
+                                <select class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>High</option>
+                                    <option>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Due Date</label>
+                            <input type="date" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 pt-4">
+                            <button type="button" class="px-4 py-2 text-slate-600 border border-slate-300 rounded-lg hover:bg-slate-50">
+                                Cancel
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-800">
+                                Save Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Modal -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            // Simple demo interactivity - replace with proper React state management
+            
+            // Modal functionality
+            const modal = document.getElementById('taskModal');
+            const quickActionButtons = document.querySelectorAll('.grid button');
+            
+            // Demo click handlers - replace with proper event handling
+            quickActionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Demo: show modal for certain actions
+                    if (this.textContent.includes('Schedule') || this.textContent.includes('Assessment')) {
+                        // modal.classList.remove('hidden'); // Uncomment for demo
+                        console.log('Action clicked:', this.textContent.trim());
+                    }
+                });
+            });
+            
+            // Progress bar animations (demo only)
+            const progressBars = document.querySelectorAll('[style*="width"]');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1s ease-out';
+                    bar.style.width = width;
+                }, 100);
+            });
+            
+            // Close modal functionality
+            modal?.addEventListener('click', function(e) {
+                if (e.target === modal || e.target.closest('.fa-times')) {
+                    modal.classList.add('hidden');
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -10,6 +10,18 @@ The platform offers task management, team assessment tools, learning resource tr
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+- **Docker Setup (Latest)**: Added comprehensive Docker containerization following 12 Factor App principles with multi-stage builds, health checks, and security best practices
+- **Enhanced Export System**: Implemented dropdown export menu with JSON and CSV format options for comprehensive progress reporting
+- **12 Factor Compliance**: Full adherence to 12 Factor App methodology including environment config, stateless processes, and proper backing services
+- **Production Ready**: Complete deployment setup with docker-compose.yml, health monitoring, and proper database initialization
+- **Export Functionality**: Implemented fully functional export report feature that generates comprehensive JSON reports with all user progress data
+- **Responsive Export Button**: Made export button adapt to screen sizes with appropriate text and sizing
+- **Navigation Enhancement**: Added collapsible sidebar navigation with responsive behavior that defaults to collapsed on devices less than 8 inches
+- **UI Cleanup**: Removed demo user icon and username from header component for cleaner interface
+- **Multipoint Checklist System**: Implemented comprehensive checklist management with CRUD operations, priority levels, progress tracking, and database integration
+
 ## System Architecture
 
 ### Frontend Architecture

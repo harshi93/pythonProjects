@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "${PORT:-5001}:${PORT:-5001}"
+    environment:
+      # Factor III: Config - Store config in environment
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-5001}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/leadership_transition}
+      # Factor IV: Backing services - Treat backing services as attached resources
+      - PGHOST=${PGHOST:-postgres}
+      - PGPORT=${PGPORT:-5432}
+      - PGDATABASE=${PGDATABASE:-leadership_transition}
+      - PGUSER=${PGUSER:-postgres}
+      - PGPASSWORD=${PGPASSWORD:-postgres}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Factor IX: Disposability - Fast startup and graceful shutdown
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:${PORT:-5001}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Factor IV: Backing services - Database as attached resource
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      # Factor III: Config - Environment-based configuration
+      POSTGRES_DB: ${PGDATABASE:-leadership_transition}
+      POSTGRES_USER: ${PGUSER:-postgres}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-postgres}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    ports:
+      - "${PGPORT:-5433}:5432"
+    volumes:
+      # Factor VI: Processes - Stateless with external data persistence
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    # Factor IX: Disposability - Fast startup and graceful shutdown
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres} -d ${PGDATABASE:-leadership_transition}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local
